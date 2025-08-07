@@ -45,62 +45,30 @@ class Task:
 
 # Model and task configurations
 MODELS = {
-    "qa": Model(
-        model="nomic-embed-text:v1.5",
-        prefix="search_query: ",
-        suffix="",
-        distance_metric="cosine",
-    ),
-    "style": Model(
-        model="nomic-embed-text:v1.5",
-        prefix="classification: ",
-        suffix="",
-        distance_metric="cosine",
-    ),
-    "semantic": Model(
-        model="nomic-embed-text:v1.5",
-        prefix="clustering: ",
-        suffix="",
-        distance_metric="cosine",
-    ),
-    "similar_code": Model(
-        model="nomic-embed-text:v1.5",
-        prefix="clustering: ",
-        suffix="",
-        distance_metric="cosine",
-    ),
+    "qa":           Model(model="nomic-embed-text:v1.5",                 prefix="search_query: "  ),
+    "style":        Model(model="nomic-embed-text:v1.5",                 prefix="classification: "),
+    "semantic":     Model(model="nomic-embed-text:v1.5",                 prefix="clustering: "    ),
+    "similar_code": Model(model="hamidakach/nomic-embed-text-v1.5-GGUF", prefix="clustering: "    ),
 }
 
 TASKS = {
-    "style": Task(
-        name="style",
-        description="Search for content clustered by theme or style",
-    ),
-    "qa": Task(
-        name="qa", 
-        description="Search optimized for question->answer pairs",
-    ),
-    "semantic": Task(
-        name="semantic",
-        description="Search based on semantic similarity",
-    ),
-    "similar_code": Task(
-        name="similar_code",
-        description="Search for similar code snippets",
-    ),
+    "style":        Task(name="style",        description="Search for content clustered by theme or style"),
+    "qa":           Task(name="qa",           description="Search optimized for question->answer pairs"   ),
+    "semantic":     Task(name="semantic",     description="Search based on semantic similarity"           ),
+    "similar_code": Task(name="similar_code", description="Search for similar code snippets"              ),
 }
 
 # Distance metric mappings
 DISTANCE_OPERATORS = {
-    "cosine": "<=>",
+    "cosine":        "<=>",
     "inner_product": "<#>",
-    "l2": "<->",
+    "l2":            "<->",
 }
 
 DISTANCE_ORDER = {
-    "cosine": "ASC",
+    "cosine":        "ASC" ,
     "inner_product": "DESC", 
-    "l2": "ASC",
+    "l2":            "ASC" ,
 }
 
 class RAGMCPServer:
@@ -202,7 +170,7 @@ class RAGMCPServer:
 
 # Initialize FastMCP and RAG server
 rag_server = RAGMCPServer()
-mcp = FastMCP("RAG-MCP Server")
+mcp = FastMCP("KBDB")
 
 @mcp.tool
 def search_style(query: str, top_k: int = 3) -> str:
